@@ -1,8 +1,28 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
+-- [[ Vim Global Options ]]
 vim.g.mapleader = " "
+vim.g.mapLocalLeader = " "
+-- [[ Vim Options ]]
+-- Show line number
+vim.o.number = true -- What's the difference between opt.number and o.number?
+
+vim.o.showmode= false
+
+vim.o.cursorline = true
+
+vim.o.scrolloff = 15
+
+vim.o.breakindent = true
+
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+vim.o.signcolumn = 'yes'
+
+vim.o.timeoutlen = 300
+
+vim.o.updatetime = 200
+
+vim.o.confirm = true
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -22,14 +42,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Manual user Setup
-vim.opt.number = true
 vim.keymap.set('n', '<C-E>', ':Neotree filesystem reveal left<CR>')
 vim.keymap.set('n', '<C-s>', ':w<CR>')
 vim.keymap.set('n', '<C-n>', ':nohlsearch<CR>')
-
--- Setup leader keys
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
 
 -- Setup lazy.nvim
 require("lazy").setup({
