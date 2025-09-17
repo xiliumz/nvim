@@ -1,3 +1,8 @@
+vim.cmd("set expandtab")
+vim.cmd("set tabstop=2")
+vim.cmd("set softtabstop=2")
+vim.cmd("set shiftwidth=2")
+
 -- [[ Vim Global Options ]]
 vim.g.mapleader = " "
 vim.g.mapLocalLeader = " "
@@ -5,7 +10,7 @@ vim.g.mapLocalLeader = " "
 -- [[ Vim Options ]]
 -- Show line number
 vim.o.number = true -- What's the difference between opt.number and o.number?
-vim.o.showmode= false
+vim.o.showmode = false
 vim.o.cursorline = true
 vim.o.scrolloff = 15
 vim.o.breakindent = true
@@ -34,4 +39,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
-require("lazy").setup({})
+require("lazy").setup({
+	{
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000
+  }
+})
