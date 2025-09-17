@@ -39,10 +39,4 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
-require("lazy").setup({
-	{
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000
-  }
-})
+require("lazy").setup({})
