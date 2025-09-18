@@ -29,6 +29,9 @@ vim.o.updatetime = 200
 -- Ask confirmation if something changed and not saved yet
 vim.o.confirm = true
 
+-- [[ Basic Keymaps ]]
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
