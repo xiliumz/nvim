@@ -1,24 +1,32 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=2")
-vim.cmd("set softtabstop=2")
-vim.cmd("set shiftwidth=2")
-
 -- [[ Vim Global Options ]]
 vim.g.mapleader = " "
 vim.g.mapLocalLeader = " "
 
 -- [[ Vim Options ]]
+-- Tab Options
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 -- Show line number
-vim.o.number = true -- What's the difference between opt.number and o.number?
+vim.o.number = true
 vim.o.showmode = false
+-- Highlight line under the cursor
 vim.o.cursorline = true
-vim.o.scrolloff = 15
+-- Line scroll offset
+vim.o.scrolloff = 20
+-- Basically it will indent new line because of wrap line
 vim.o.breakindent = true
+-- Better for searching using `/`
 vim.o.ignorecase = true
 vim.o.smartcase = true
+-- Add space next to line number for indicator
 vim.o.signcolumn = 'yes'
+-- Timeout for pressing command, eg: <leader>gf -> this will clear the typed command if not finished under 300ms
 vim.o.timeoutlen = 300
+-- How often vim update (re-run "CursorHold" event)
 vim.o.updatetime = 200
+-- Ask confirmation if something changed and not saved yet
 vim.o.confirm = true
 
 -- Bootstrap lazy.nvim
