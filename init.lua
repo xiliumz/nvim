@@ -6,8 +6,9 @@ vim.g.mapLocalLeader = " "
 -- Tab Options
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
+-- Combine clipboard with system
+vim.o.clipboard = 'unnamedplus'
 -- Show line number
 vim.o.number = true
 vim.o.showmode = false
@@ -30,7 +31,13 @@ vim.o.updatetime = 200
 vim.o.confirm = true
 
 -- [[ Basic Keymaps ]]
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', {desc = 'Open diagnostic'})
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', {desc = 'Exit terminal mode'})
+-- Horizontal split
+vim.keymap.set('n', '<leader>th', '<cmd>belowright split | terminal<CR>')
+-- Vertical split
+vim.keymap.set('n', '<leader>tv', '<cmd>belowright vsplit | terminal<CR>')
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -50,4 +57,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
-require("lazy").setup()
+require("lazy").setup({
+  "catppuccin/nvim",
+  name = "catppuccin",
+  priority = 1000, 
+	config = function()
+    require("catppuccin").setup({
+      transparent_background = true, -- disables setting the background color.
+    })
+    vim.cmd.colorscheme("catppuccin")
+	end
+})
