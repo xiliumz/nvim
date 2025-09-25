@@ -24,7 +24,7 @@ vim.o.smartcase = true
 -- Add space next to line number for indicator
 vim.o.signcolumn = 'yes'
 -- Timeout for pressing command, eg: <leader>gf -> this will clear the typed command if not finished under 300ms
-vim.o.timeoutlen = 300
+vim.o.timeoutlen = 500
 -- How often vim update (re-run "CursorHold" event)
 vim.o.updatetime = 200
 -- Ask confirmation if something changed and not saved yet
