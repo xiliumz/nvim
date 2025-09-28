@@ -4,9 +4,9 @@ vim.g.mapLocalLeader = " "
 
 -- [[ Vim Options ]]
 -- Tab Options
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+-- vim.opt.expandtab = true
+-- vim.opt.tabstop = 2
+-- vim.opt.shiftwidth = 2
 -- Combine clipboard with system
 vim.o.clipboard = 'unnamedplus'
 -- Show line number
@@ -66,15 +66,31 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- [[ Configure and install plugins ]]
 -- Setup lazy.nvim
 require("lazy").setup({
-  "catppuccin/nvim",
-  name = "catppuccin",
-  priority = 1000, 
-	config = function()
-    require("catppuccin").setup({
-      transparent_background = true,
-    })
-    vim.cmd.colorscheme("catppuccin")
-	end
+  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000, 
+    config = function()
+      require("catppuccin").setup({
+        transparent_background = true,
+      })
+      vim.cmd.colorscheme("catppuccin")
+    end
+  },
+  {
+    'lewis6991/gitsigns.nvim',
+    opts = {
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '-' },
+        changedelete = { text = '~' }
+      }
+    }
+  }
 })
