@@ -34,10 +34,20 @@ vim.o.confirm = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', {desc = 'Open diagnostic'})
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', {desc = 'Exit terminal mode'})
--- Horizontal split
+-- Terminal Horizontal split
 vim.keymap.set('n', '<leader>th', '<cmd>belowright split | terminal<CR>')
--- Vertical split
+-- Terminal Vertical split
 vim.keymap.set('n', '<leader>tv', '<cmd>belowright vsplit | terminal<CR>')
+
+-- [[ Basic Autocommands ]]
+-- Highlight when yanking text
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', {clear = true}),
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -63,7 +73,7 @@ require("lazy").setup({
   priority = 1000, 
 	config = function()
     require("catppuccin").setup({
-      transparent_background = true, -- disables setting the background color.
+      transparent_background = true,
     })
     vim.cmd.colorscheme("catppuccin")
 	end
