@@ -69,7 +69,13 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 -- Setup lazy.nvim
 require("lazy").setup({
+	{
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  config = function()
+	  require('guess-indent').setup()
+  end,
+	},
+
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -81,6 +87,7 @@ require("lazy").setup({
       vim.cmd.colorscheme("catppuccin")
     end
   },
+
   {
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -92,5 +99,23 @@ require("lazy").setup({
         changedelete = { text = '~' }
       }
     }
-  }
+  },
+
+	{
+		'nvim-telescope/telescope.nvim',
+		event = 'VimEnter',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			{
+				'nvim-telescope/telescope-fzf-native.nvim',
+				build = 'make',
+				cond = function()
+					return vim.fn.executable 'make' == 1
+				end,
+			},
+			-- { 'nvim-telescope/telescope-ui-select.nvim' },
+
+			{ 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font }
+		}
+	}
 })
