@@ -31,13 +31,13 @@ vim.o.updatetime = 200
 vim.o.confirm = true
 
 -- [[ Basic Keymaps ]]
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', {desc = 'Open diagnostic'})
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', {desc = 'Exit terminal mode'})
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search'})
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic'})
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode'})
 -- Terminal Horizontal split
-vim.keymap.set('n', '<leader>th', '<cmd>belowright split | terminal<CR>')
+vim.keymap.set('n', '<leader>th', '<cmd>belowright split | terminal<CR>', { desc = 'Split terminal horizontally (open bottom)'})
 -- Terminal Vertical split
-vim.keymap.set('n', '<leader>tv', '<cmd>belowright vsplit | terminal<CR>')
+vim.keymap.set('n', '<leader>tv', '<cmd>belowright vsplit | terminal<CR>', { desc = 'Split terminal horizontally (open right)'})
 
 -- [[ Basic Autocommands ]]
 -- Highlight when yanking text
@@ -76,16 +76,29 @@ require("lazy").setup({
   end,
 	},
 
+  -- Themes
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   priority = 1000, 
+  --   config = function()
+  --     require("catppuccin").setup({
+  --       transparent_background = true,
+  --     })
+  --     vim.cmd.colorscheme("catppuccin")
+  --   end
+  -- },
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000, 
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
     config = function()
-      require("catppuccin").setup({
-        transparent_background = true,
+      require('tokyonight').setup({
+        transparent = true,
+        terminal_colors = false,
       })
-      vim.cmd.colorscheme("catppuccin")
-    end
+      vim.cmd.colorscheme("tokyonight-night")
+    end,
   },
 
   {
@@ -101,6 +114,27 @@ require("lazy").setup({
     }
   },
 
+  { -- Useful plugin to show you pending keybinds.
+    'folke/which-key.nvim',
+    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    opts = {
+      -- delay between pressing a key and opening which-key (milliseconds)
+      -- this setting is independent of vim.o.timeoutlen
+      delay = 0,
+      icons = {
+        -- set icon mappings to true if you have a Nerd Font
+        mappings = vim.g.have_nerd_font,
+      },
+
+      -- Document existing key chains
+      spec = {
+        -- { '<leader>s', group = '[S]earch' },
+        -- { '<leader>t', group = '[T]erminal' },
+        -- { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+      },
+    },
+  },
+
 	{
 		'nvim-telescope/telescope.nvim',
 		event = 'VimEnter',
@@ -113,8 +147,7 @@ require("lazy").setup({
 					return vim.fn.executable 'make' == 1
 				end,
 			},
-			-- { 'nvim-telescope/telescope-ui-select.nvim' },
-
+			{ 'nvim-telescope/telescope-ui-select.nvim' },
 			{ 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font }
 		}
 	}

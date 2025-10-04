@@ -1,5 +1,4 @@
 {
-  "catppuccin": { "branch": "main", "commit": "f19cab18ec4dc86d415512c7a572863b2adbcc18" },
   "gitsigns.nvim": { "branch": "main", "commit": "23ae90a2a52fdc9b8c50dc61d6c30ebb18521343" },
   "guess-indent.nvim": { "branch": "main", "commit": "84a4987ff36798c2fc1169cbaff67960aed9776f" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
@@ -7,5 +6,7 @@
   "plenary.nvim": { "branch": "master", "commit": "b9fd5226c2f76c951fc8ed5923d85e4de065e509" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "1f08ed60cafc8f6168b72b80be2b2ea149813e55" },
   "telescope-ui-select.nvim": { "branch": "master", "commit": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2" },
-  "telescope.nvim": { "branch": "master", "commit": "b4da76be54691e854d3e0e02c36b0245f945c2c7" }
+  "telescope.nvim": { "branch": "master", "commit": "b4da76be54691e854d3e0e02c36b0245f945c2c7" },
+  "tokyonight.nvim": { "branch": "main", "commit": "4d159616aee17796c2c94d2f5f87d2ee1a3f67c7" },
+  "which-key.nvim": { "branch": "main", "commit": "904308e6885bbb7b60714c80ab3daf0c071c1492" }
 }
