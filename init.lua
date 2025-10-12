@@ -18,7 +18,7 @@ vim.o.splitbelow = true
 -- Highlight line under the cursor
 vim.o.cursorline = true
 -- Line scroll offset
-vim.o.scrolloff = 20
+vim.o.scrolloff = 18
 -- Basically it will indent new line because of wrap line
 vim.o.breakindent = true
 -- Better for searching using `/`
@@ -32,6 +32,14 @@ vim.o.timeoutlen = 500
 vim.o.updatetime = 200
 -- Ask confirmation if something changed and not saved yet
 vim.o.confirm = true
+-- Sets how neovim will display certain whitespace characters in the editor.
+vim.o.list = true
+vim.opt.listchars = {
+  tab = '» ',
+  trail = '·',
+  nbsp = '␣'
+}
+
 
 -- [[ Basic Keymaps ]]
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search'})
@@ -119,13 +127,7 @@ require("lazy").setup({
   {
     'lewis6991/gitsigns.nvim',
     opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '-' },
-        changedelete = { text = '~' }
-      }
+      current_line_blame = true,
     }
   },
 
@@ -144,27 +146,27 @@ require("lazy").setup({
       -- Document existing key chains
       spec = {
         { '<leader>s', group = '[S]earch' },
-        -- { '<leader>t', group = '[T]erminal' },
+        { '<leader>t', group = '[T]erminal' },
         -- { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       },
     },
   },
 
-	{
-		'nvim-telescope/telescope.nvim',
-		event = 'VimEnter',
-		dependencies = {
-			'nvim-lua/plenary.nvim',
-			{
-				'nvim-telescope/telescope-fzf-native.nvim',
-				build = 'make',
-				cond = function()
-					return vim.fn.executable 'make' == 1
-				end,
-			},
-			{ 'nvim-telescope/telescope-ui-select.nvim' },
-			{ 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font }
-		},
+  {
+    'nvim-telescope/telescope.nvim',
+    event = 'VimEnter',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make',
+        cond = function()
+          return vim.fn.executable 'make' == 1
+        end,
+      },
+      { 'nvim-telescope/telescope-ui-select.nvim' },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font }
+    },
     config = function()
       require('telescope').setup {
        extensions = {
@@ -216,5 +218,33 @@ require("lazy").setup({
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
     end,
-	}
+  },
+
+  {
+    'nvim-mini/mini.nvim',
+    version = '*',
+    config = function()
+      require('mini.surround').setup()
+
+      require('mini.pairs').setup()
+
+      local statusline = require 'mini.statusline'
+      statusline.setup { use_icons = vim.g.have_nerd_font }
+
+    end,
+  },
+
+  -- [[ LSP Configuration ]]
+  {
+    -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+    -- used for completion, annotations and signatures of Neovim apis
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {
+      library = {
+        -- Load luvit types when the `vim.uv` word is found
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+      },
+    },
+  }
 })
