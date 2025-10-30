@@ -200,10 +200,14 @@ require("lazy").setup({
       vim.keymap.set('n', '<leader>/', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
         builtin.current_buffer_fuzzy_find(
-          -- require('telescope.themes').get_dropdown {
-          --   winblend = 20,
-          --   previewer = false,
-          -- }
+          require('telescope.themes').get_dropdown {
+            winblend = 20,
+            previewer = false,
+            layout_config = {
+              width = 0.8,
+              height = 0.6,
+            }
+          }
         )
       end, { desc = '[/] Fuzzily search in current buffer' })
 
