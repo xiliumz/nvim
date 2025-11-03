@@ -407,9 +407,16 @@ require("lazy").setup({
       -- }
 
 
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
+
       require('mason-lspconfig').setup {
-        ensure_installed = {'stylua', 'lua_ls'},
+        ensure_installed = {'stylua', 'lua_ls', 'vtsls', 'cssmodules_ls'},
         automatic_installation = false,
+        handlers = function(server_name)
+          local server = {}
+          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, {})
+          require('lspconfig')[server_name].setup(server)
+        end,
       }
     end,
   }
