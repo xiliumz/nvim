@@ -100,12 +100,12 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 -- Setup lazy.nvim
 require("lazy").setup({
-	{
-  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
-  config = function()
-	  require('guess-indent').setup()
-  end,
-	},
+  {
+    'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+    config = function()
+      require('guess-indent').setup()
+    end,
+  },
 
   -- Themes
   -- {
@@ -275,7 +275,6 @@ require("lazy").setup({
     dependencies = {
       { 'mason-org/mason.nvim', opts = {} },
       'mason-org/mason-lspconfig.nvim',
-      'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
       { 'j-hui/fidget.nvim', opts = {} },
@@ -407,6 +406,11 @@ require("lazy").setup({
       --   },
       -- }
 
+
+      require('mason-lspconfig').setup {
+        ensure_installed = {'stylua', 'lua_ls'},
+        automatic_installation = false,
+      }
     end,
   }
 })
