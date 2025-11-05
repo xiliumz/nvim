@@ -370,7 +370,7 @@ require("lazy").setup({
 
           -- The following code creates a keymap to toggle inlay hints in your code
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-            map('<leader>th', function()
+            map('gth', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[T]oggle Inlay [H]ints')
           end
@@ -410,7 +410,13 @@ require("lazy").setup({
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       require('mason-lspconfig').setup {
-        ensure_installed = {'stylua', 'lua_ls', 'vtsls', 'cssmodules_ls'},
+        ensure_installed = {
+          'stylua',
+          'lua_ls',
+          -- 'vtsls',
+          'ts_ls',
+          'cssmodules_ls'
+        },
         automatic_installation = false,
         handlers = function(server_name)
           local server = {}
