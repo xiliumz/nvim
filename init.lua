@@ -150,6 +150,77 @@ require("lazy").setup({
 				topdelete = { text = "‾" },
 				changedelete = { text = "~" },
 			},
+			on_attach = function(bufnr)
+				local gitsigns = require("gitsigns")
+
+				local function map(mode, l, r, opts)
+					opts = opts or {}
+					opts.buffer = bufnr
+					vim.keymap.set(mode, l, r, opts)
+				end
+
+				-- Navigation between hunks
+				map("n", "]c", function()
+					if vim.wo.diff then
+						vim.cmd.normal({ "]c", bang = true })
+					else
+						---@diagnostic disable-next-line: param-type-mismatch
+						gitsigns.nav_hunk("next")
+					end
+				end, { desc = "Next [H]unk" })
+
+				map("n", "[c", function()
+					if vim.wo.diff then
+						vim.cmd.normal({ "[c", bang = true })
+					else
+						---@diagnostic disable-next-line: param-type-mismatch
+						gitsigns.nav_hunk("prev")
+					end
+				end, { desc = "Previous [H]unk" })
+
+				-- Hunk actions
+				map("n", "<leader>hs", gitsigns.stage_hunk, { desc = "[H]unk [S]tage" })
+				map("n", "<leader>hr", gitsigns.reset_hunk, { desc = "[H]unk [R]eset" })
+
+				map("v", "<leader>hs", function()
+					gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end, { desc = "[H]unk [S]tage (Visual)" })
+
+				map("v", "<leader>hr", function()
+					gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end, { desc = "[H]unk [R]eset (Visual)" })
+
+				map("n", "<leader>hS", gitsigns.stage_buffer, { desc = "[H]unk [S]tage Buffer" })
+				map("n", "<leader>hR", gitsigns.reset_buffer, { desc = "[H]unk [R]eset Buffer" })
+
+				-- Hunk preview
+				map("n", "<leader>hp", gitsigns.preview_hunk, { desc = "[H]unk [P]review" })
+				map("n", "<leader>hi", gitsigns.preview_hunk_inline, { desc = "[H]unk Preview [I]nline" })
+
+				-- Git blame
+				map("n", "<leader>hb", function()
+					gitsigns.blame_line({ full = true })
+				end, { desc = "[H]unk [B]lame line" })
+
+				-- Git diff
+				map("n", "<leader>hd", gitsigns.diffthis, { desc = "[H]unk [D]iff file" })
+				map("n", "<leader>hD", function()
+					gitsigns.diffthis("~")
+				end, { desc = "[H]unk [D]iff last commit" })
+
+				-- Quickfix list
+				map("n", "<leader>hQ", function()
+					gitsigns.setqflist("all")
+				end, { desc = "[H]unks to Quickfix (all)" })
+				map("n", "<leader>hq", gitsigns.setqflist, { desc = "[H]unks to Quickfix" })
+
+				-- Toggles
+				map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "[T]oggle [B]lame line" })
+				map("n", "<leader>tw", gitsigns.toggle_word_diff, { desc = "[T]oggle [W]ord diff" })
+
+				-- Text object for hunks
+				map({ "o", "x" }, "ih", gitsigns.select_hunk, { desc = "Select [H]unk (text object)" })
+			end,
 		},
 	},
 
