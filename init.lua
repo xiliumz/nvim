@@ -113,6 +113,10 @@ require("lazy").setup({
 		"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
 		opts = {},
 	},
+	{
+		"karb94/neoscroll.nvim", -- use <C-u> and <C-d>
+		opts = {},
+	},
 
 	-- Themes
 	-- {
