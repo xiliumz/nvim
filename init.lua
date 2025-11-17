@@ -113,9 +113,23 @@ require("lazy").setup({
 		"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
 		opts = {},
 	},
+
 	{
 		"karb94/neoscroll.nvim", -- use <C-u> and <C-d>
 		opts = {},
+	},
+
+	{
+		"akinsho/bufferline.nvim",
+		version = "*",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		config = function()
+			require("bufferline").setup({})
+
+			vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { desc = "Go To Next Tab" })
+			vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { desc = "Go To Previous Tab" })
+			vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete Buffer" })
+		end,
 	},
 
 	-- Themes
@@ -350,8 +364,6 @@ require("lazy").setup({
 		version = "*",
 		config = function()
 			require("mini.surround").setup()
-
-			require("mini.pairs").setup()
 
 			local statusline = require("mini.statusline")
 			statusline.setup({ use_icons = vim.g.have_nerd_font })
