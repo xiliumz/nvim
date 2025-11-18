@@ -150,12 +150,23 @@ require("lazy").setup({
 		priority = 1000,
 		config = function()
 			require("tokyonight").setup({
-				transparent = true,
+				-- transparent = true,
 				terminal_colors = false,
 			})
 			vim.cmd.colorscheme("tokyonight-night")
 		end,
 	},
+	-- {
+	-- 	"loctvl842/monokai-pro.nvim",
+	-- 	config = function()
+	-- 		require("monokai-pro").setup({
+	-- 			-- transparent_background = true,
+	-- 			filter = "spectrum",
+	-- 		})
+	--
+	-- 		vim.cmd.colorscheme("monokai-pro")
+	-- 	end,
+	-- },
 
 	{
 		"lewis6991/gitsigns.nvim",
@@ -542,7 +553,7 @@ require("lazy").setup({
 					-- 'vtsls',
 					"ts_ls",
 					"cssmodules_ls",
-					"eslint",
+					-- "eslint",
 				},
 				automatic_installation = false,
 				handlers = function(server_name)
@@ -642,7 +653,7 @@ require("lazy").setup({
 					return nil
 				else
 					return {
-						timeout_ms = 1500,
+						timeout_ms = 15000,
 						lsp_format = "fallback",
 					}
 				end
