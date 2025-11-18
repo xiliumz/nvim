@@ -19,7 +19,7 @@ vim.o.splitbelow = true
 -- Highlight line under the cursor
 vim.o.cursorline = true
 -- Line scroll offset
-vim.o.scrolloff = 18
+vim.o.scrolloff = 15
 -- Basically it will indent new line because of wrap line
 vim.o.breakindent = true
 -- Better for searching using `/`
