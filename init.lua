@@ -174,29 +174,35 @@ require("lazy").setup({
 	--     vim.cmd.colorscheme("catppuccin")
 	--   end
 	-- },
-	{
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			require("tokyonight").setup({
-				-- transparent = true,
-				terminal_colors = false,
-			})
-			vim.cmd.colorscheme("tokyonight-night")
-		end,
-	},
 	-- {
-	-- 	"loctvl842/monokai-pro.nvim",
+	-- 	"folke/tokyonight.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
 	-- 	config = function()
-	-- 		require("monokai-pro").setup({
-	-- 			-- transparent_background = true,
-	-- 			filter = "spectrum",
+	-- 		require("tokyonight").setup({
+	-- 			transparent = true,
+	-- 			terminal_colors = false,
 	-- 		})
-	--
-	-- 		vim.cmd.colorscheme("monokai-pro")
+	-- 		vim.cmd.colorscheme("tokyonight-night")
 	-- 	end,
 	-- },
+	{
+		"loctvl842/monokai-pro.nvim",
+		config = function()
+			require("monokai-pro").setup({
+				-- transparent_background = true,
+				filter = "spectrum",
+				override = function()
+					return {
+						["@lsp.type.parameter"] = { link = "@variable.parameter" },
+						["@lsp.typemod.variable.readonly"] = { link = "@constant" },
+					}
+				end,
+			})
+
+			vim.cmd.colorscheme("monokai-pro")
+		end,
+	},
 
 	{
 		"lewis6991/gitsigns.nvim",
@@ -404,6 +410,11 @@ require("lazy").setup({
 		"nvim-mini/mini.nvim",
 		version = "*",
 		config = function()
+			-- Add/delete/replace surroundings (brackets, quotes, etc.)
+			--
+			-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+			-- - sd'   - [S]urround [D]elete [']quotes
+			-- - sr)'  - [S]urround [R]eplace [)] [']
 			require("mini.surround").setup()
 
 			local statusline = require("mini.statusline")
