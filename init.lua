@@ -143,8 +143,18 @@ require("lazy").setup({
 		config = function()
 			require("neo-tree").setup({
 				filesystem = {
-					follow_current_file = true,
 					hijack_netrw = true,
+					filtered_items = {
+						visible = true, -- show hidden files
+						hide_dotfiles = false,
+					},
+				},
+				follow_current_file = {
+					enabled = false, -- This will find and focus the file in the active buffer every time
+					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+				},
+				git_status = {
+					symbols = { added = "A", modified = "M", deleted = "D" },
 				},
 			})
 
@@ -216,7 +226,7 @@ require("lazy").setup({
 						---@diagnostic disable-next-line: param-type-mismatch
 						gitsigns.nav_hunk("next")
 					end
-				end, { desc = "Next [H]unk" })
+				end, { desc = "Next [C]hange" })
 
 				map("n", "[c", function()
 					if vim.wo.diff then
@@ -225,7 +235,7 @@ require("lazy").setup({
 						---@diagnostic disable-next-line: param-type-mismatch
 						gitsigns.nav_hunk("prev")
 					end
-				end, { desc = "Previous [H]unk" })
+				end, { desc = "Previous [C]hange" })
 
 				-- Hunk actions
 				map("n", "<leader>hs", gitsigns.stage_hunk, { desc = "[H]unk [S]tage" })
