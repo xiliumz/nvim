@@ -685,7 +685,7 @@ require("lazy").setup({
 					return nil
 				else
 					return {
-						timeout_ms = 15000,
+						timeout_ms = 500,
 						lsp_format = "fallback",
 					}
 				end
