@@ -129,7 +129,7 @@ require("lazy").setup({
 
 			vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { desc = "Go To Next Tab" })
 			vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { desc = "Go To Previous Tab" })
-			vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete Buffer" })
+			vim.keymap.set("n", "<leader>d", ":bdelete<CR>", { desc = "Delete Buffer" })
 		end,
 	},
 
@@ -144,10 +144,8 @@ require("lazy").setup({
 		config = function()
 			require("neo-tree").setup({
 				filesystem = {
-					hijack_netrw = true,
 					filtered_items = {
 						visible = true, -- show hidden files
-						hide_dotfiles = false,
 					},
 				},
 				follow_current_file = {
@@ -165,15 +163,15 @@ require("lazy").setup({
 
 	-- Themes
 	-- {
-	--   "catppuccin/nvim",
-	--   name = "catppuccin",
-	--   priority = 1000,
-	--   config = function()
-	--     require("catppuccin").setup({
-	--       transparent_background = true,
-	--     })
-	--     vim.cmd.colorscheme("catppuccin")
-	--   end
+	-- 	"catppuccin/nvim",
+	-- 	name = "catppuccin",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("catppuccin").setup({
+	-- 			-- transparent_background = true,
+	-- 		})
+	-- 		vim.cmd.colorscheme("catppuccin")
+	-- 	end,
 	-- },
 	-- {
 	-- 	"folke/tokyonight.nvim",
@@ -635,8 +633,7 @@ require("lazy").setup({
 				-- <c-k>: Toggle signature help
 				--
 				-- See :h blink-cmp-config-keymap for defining your own keymap
-				preset = "default",
-				["<C-CR>"] = { "accept" },
+				preset = "enter",
 			},
 
 			appearance = {
