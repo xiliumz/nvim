@@ -1,6 +1,7 @@
 -- [[ Vim Global Options ]]
 vim.g.mapleader = " "
 vim.g.mapLocalLeader = " "
+vim.g.have_nerd_font = true
 
 -- [[ Vim Options ]]
 -- Tab Options
@@ -19,7 +20,7 @@ vim.o.splitbelow = true
 -- Highlight line under the cursor
 vim.o.cursorline = true
 -- Line scroll offset
-vim.o.scrolloff = 15
+vim.o.scrolloff = 20
 -- Basically it will indent new line because of wrap line
 vim.o.breakindent = true
 -- Better for searching using `/`
