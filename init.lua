@@ -409,6 +409,13 @@ require("lazy").setup({
 		"nvim-mini/mini.nvim",
 		version = "*",
 		config = function()
+			-- Better Around/Inside textobjects
+			--
+			-- Examples:
+			--  - va)  - [V]isually select [A]round [)]paren
+			--  - yinq - [Y]ank [I]nside [N]ext [Q]uote
+			--  - ci'  - [C]hange [I]nside [']quote
+			require("mini.ai").setup()
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
 			--
 			-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
@@ -444,6 +451,7 @@ require("lazy").setup({
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
 			"mason-org/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 			-- Useful status updates for LSP.
 			{ "j-hui/fidget.nvim", opts = {} },
@@ -587,19 +595,32 @@ require("lazy").setup({
 
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
+			-- Server to be defined in mason-lspconfig, refer to:
+			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
+			local servers = {
+				lua_ls = {},
+				ts_ls = {},
+				cssmodules_ls = {},
+				eslint = {},
+			}
+
+			-- Additional formatter/linter from mason
+			local ensure_installed = vim.tbl_keys(servers or {})
+			vim.list_extend(ensure_installed, {
+				"stylua",
+				"eslint_d",
+			})
+
+			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+
 			require("mason-lspconfig").setup({
-				ensure_installed = {
-					-- 'stylua',
-					"lua_ls",
-					-- 'vtsls',
-					"ts_ls",
-					"cssmodules_ls",
-					-- "eslint",
-				},
 				automatic_installation = false,
 				handlers = function(server_name)
-					local server = {}
-					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, {})
+					local server = servers[server_name] or {}
+					-- This handles overriding only values explicitly passed
+					-- by the server configuration above. Useful when disabling
+					-- certain features of an LSP (for example, turning off formatting for ts_ls)
+					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 					require("lspconfig")[server_name].setup(server)
 				end,
 			})
