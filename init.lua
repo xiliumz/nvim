@@ -1,6 +1,6 @@
 -- [[ Vim Global Options ]]
-vim.g.mapleader = " "
-vim.g.mapLocalLeader = " "
+-- vim.g.mapleader = " "
+-- vim.g.mapLocalLeader = " "
 vim.g.have_nerd_font = true
 
 -- [[ Vim Options ]]
