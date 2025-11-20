@@ -144,8 +144,21 @@ require("lazy").setup({
 		config = function()
 			vim.keymap.set("n", "<leader>e", "<Cmd>Neotree<CR>")
 			require("neo-tree").setup({
-				close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
-				popup_border_style = "NC", -- or "" to use 'winborder' on Neovim v0.11+
+				sources = {
+					"filesystem",
+					"buffers",
+					"git_status",
+					"document_symbols",
+				},
+				---@diagnostic disable-next-line: missing-fields
+				source_selector = {
+					winbar = true,
+					sources = {
+						{ source = "filesystem", display_name = "Files" },
+						{ source = "git_status", display_name = "Git" },
+						{ source = "document_symbols", display_name = "Symbols" },
+					},
+				},
 				enable_git_status = true,
 				enable_diagnostics = true,
 				default_component_configs = {
@@ -170,7 +183,6 @@ require("lazy").setup({
 				-- see `:h neo-tree-custom-commands-global`
 				window = {
 					mappings = {
-						["<space>"] = "none",
 						["a"] = {
 							"add",
 							config = {
