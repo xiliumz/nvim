@@ -142,22 +142,60 @@ require("lazy").setup({
 			"MunifTanjim/nui.nvim",
 		},
 		config = function()
+			vim.keymap.set("n", "<leader>e", "<Cmd>Neotree<CR>")
 			require("neo-tree").setup({
-				filesystem = {
-					filtered_items = {
-						visible = true, -- show hidden files
+				close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+				popup_border_style = "NC", -- or "" to use 'winborder' on Neovim v0.11+
+				enable_git_status = true,
+				enable_diagnostics = true,
+				default_component_configs = {
+					git_status = {
+						symbols = {
+							-- Change type
+							added = "✚", -- or "✚"
+							modified = "", -- or ""
+							deleted = "✖", -- this can only be used in the git_status source
+							renamed = "󰁕", -- this can only be used in the git_status source
+							-- Status type
+							untracked = "",
+							ignored = "",
+							unstaged = "󰄱",
+							staged = "",
+							conflict = "",
+						},
 					},
 				},
-				follow_current_file = {
-					enabled = false, -- This will find and focus the file in the active buffer every time
-					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+				-- A list of functions, each representing a global custom command
+				-- that will be available in all sources (if not overridden in `opts[source_name].commands`)
+				-- see `:h neo-tree-custom-commands-global`
+				window = {
+					mappings = {
+						["<space>"] = "none",
+						["a"] = {
+							"add",
+							config = {
+								show_path = "relative", -- "none", "relative", "absolute"
+							},
+						},
+					},
 				},
-				git_status = {
-					symbols = { added = "A", modified = "M", deleted = "D" },
+				filesystem = {
+					filtered_items = {
+						follow_current_file = {
+							enabled = true, -- This will find and focus the file in the active buffer every time
+							--               -- the current file is changed while the tree is open.
+							leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+						},
+					},
+					buffers = {
+						follow_current_file = {
+							enabled = true, -- This will find and focus the file in the active buffer every time
+							--              -- the current file is changed while the tree is open.
+							leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+						},
+					},
 				},
 			})
-
-			vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { desc = "Toggle file tree" })
 		end,
 	},
 
