@@ -660,6 +660,7 @@ require("lazy").setup({
 				ts_ls = {},
 				cssmodules_ls = {},
 				eslint = {},
+				tailwindcss = {},
 			}
 
 			-- Additional formatter/linter from mason
