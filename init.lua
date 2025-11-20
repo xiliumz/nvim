@@ -615,9 +615,9 @@ require("lazy").setup({
 						client
 						and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf)
 					then
-						map("gth", function()
-							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-						end, "[T]oggle Inlay [H]ints")
+						map("<leader>i", function()
+							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
+						end, "[T]oggle [I]nlay [H]ints")
 					end
 				end,
 			})
@@ -657,7 +657,32 @@ require("lazy").setup({
 			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 			local servers = {
 				lua_ls = {},
-				ts_ls = {},
+				ts_ls = {
+					settings = {
+						javascript = {
+							inlayHints = {
+								includeInlayEnumMemberValueHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayVariableTypeHints = false,
+							},
+						},
+						typescript = {
+							inlayHints = {
+								includeInlayEnumMemberValueHints = true,
+								includeInlayFunctionLikeReturnTypeHints = true,
+								includeInlayFunctionParameterTypeHints = true,
+								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+								includeInlayPropertyDeclarationTypeHints = true,
+								includeInlayVariableTypeHints = false,
+							},
+						},
+					},
+				},
 				cssmodules_ls = {},
 				eslint = {},
 				tailwindcss = {},
