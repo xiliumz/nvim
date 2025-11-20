@@ -455,6 +455,14 @@ require("lazy").setup({
 		end,
 	},
 
+	-- Frontend stuff plugins
+	-- Auto close html tag
+	{
+		"windwp/nvim-ts-autotag",
+		event = "InsertEnter",
+		opts = {},
+	},
+
 	{
 		"nvim-mini/mini.nvim",
 		version = "*",
