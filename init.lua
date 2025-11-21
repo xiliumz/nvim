@@ -143,6 +143,7 @@ require("lazy").setup({
 		},
 		config = function()
 			vim.keymap.set("n", "<leader>e", "<Cmd>Neotree<CR>")
+
 			require("neo-tree").setup({
 				sources = {
 					"filesystem",
@@ -150,7 +151,7 @@ require("lazy").setup({
 					"git_status",
 					"document_symbols",
 				},
-				---@diagnostic disable-next-line: missing-fields
+
 				source_selector = {
 					winbar = true,
 					sources = {
@@ -159,17 +160,17 @@ require("lazy").setup({
 						{ source = "document_symbols", display_name = "Symbols" },
 					},
 				},
+
 				enable_git_status = true,
 				enable_diagnostics = true,
+
 				default_component_configs = {
 					git_status = {
 						symbols = {
-							-- Change type
-							added = "✚", -- or "✚"
-							modified = "", -- or ""
-							deleted = "✖", -- this can only be used in the git_status source
-							renamed = "󰁕", -- this can only be used in the git_status source
-							-- Status type
+							added = "✚",
+							modified = "",
+							deleted = "✖",
+							renamed = "󰁕",
 							untracked = "",
 							ignored = "",
 							unstaged = "󰄱",
@@ -178,33 +179,28 @@ require("lazy").setup({
 						},
 					},
 				},
-				-- A list of functions, each representing a global custom command
-				-- that will be available in all sources (if not overridden in `opts[source_name].commands`)
-				-- see `:h neo-tree-custom-commands-global`
+
 				window = {
 					mappings = {
 						["a"] = {
 							"add",
-							config = {
-								show_path = "relative", -- "none", "relative", "absolute"
-							},
+							config = { show_path = "relative" },
 						},
 					},
 				},
+
 				filesystem = {
-					filtered_items = {
-						follow_current_file = {
-							enabled = true, -- This will find and focus the file in the active buffer every time
-							--               -- the current file is changed while the tree is open.
-							leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
-						},
+					follow_current_file = {
+						enabled = true,
+						leave_dirs_open = false,
 					},
-					buffers = {
-						follow_current_file = {
-							enabled = true, -- This will find and focus the file in the active buffer every time
-							--              -- the current file is changed while the tree is open.
-							leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
-						},
+					hijack_netrw_behavior = "open_current",
+				},
+
+				buffers = {
+					follow_current_file = {
+						enabled = true,
+						leave_dirs_open = false,
 					},
 				},
 			})
