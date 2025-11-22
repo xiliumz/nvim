@@ -469,7 +469,10 @@ require("lazy").setup({
 			--  - va)  - [V]isually select [A]round [)]paren
 			--  - yinq - [Y]ank [I]nside [N]ext [Q]uote
 			--  - ci'  - [C]hange [I]nside [']quote
-			require("mini.ai").setup()
+			require("mini.ai").setup({
+				-- Number of lines within which surrounding is searched
+				n_lines = 5,
+			})
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
 			--
 			-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
