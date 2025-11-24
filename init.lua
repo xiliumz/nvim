@@ -129,7 +129,16 @@ require("lazy").setup({
 
 			vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { desc = "Go To Next Tab" })
 			vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { desc = "Go To Previous Tab" })
+			vim.keymap.set("n", "<A-,>", "<Cmd>BufferLineMovePrev<CR>")
+			vim.keymap.set("n", "<A-.>", "<Cmd>BufferLineMoveNext<CR>")
 			vim.keymap.set("n", "<leader>d", ":bdelete<CR>", { desc = "Delete Buffer" })
+			for i = 1, 9 do
+				vim.keymap.set("n", "<leader>" .. i, function()
+					vim.cmd("BufferLineGoToBuffer " .. i)
+				end, {
+					desc = "Go to buffer " .. i,
+				})
+			end
 		end,
 	},
 
