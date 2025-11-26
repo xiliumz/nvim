@@ -151,7 +151,7 @@ require("lazy").setup({
 			"MunifTanjim/nui.nvim",
 		},
 		config = function()
-			vim.keymap.set("n", "<leader>e", "<Cmd>Neotree<CR>")
+			vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>")
 
 			require("neo-tree").setup({
 				sources = {
