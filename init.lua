@@ -250,7 +250,7 @@ require("lazy").setup({
 		"loctvl842/monokai-pro.nvim",
 		config = function()
 			require("monokai-pro").setup({
-				-- transparent_background = true,
+				transparent_background = true,
 				filter = "spectrum",
 				override = function()
 					return {
@@ -407,7 +407,6 @@ require("lazy").setup({
 			{
 				"nvim-telescope/telescope-frecency.nvim",
 				version = "*",
-				dependencies = { "kkharji/sqlite.lua" },
 			},
 		},
 		config = function()
