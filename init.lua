@@ -160,6 +160,15 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>")
 
 			require("neo-tree").setup({
+				event_handlers = {
+					{
+						event = "file_opened",
+						handler = function()
+							require("neo-tree.command").execute({ action = "close" })
+						end,
+					},
+				},
+
 				sources = {
 					"filesystem",
 					"buffers",
@@ -494,7 +503,7 @@ require("lazy").setup({
 			--  - ci'  - [C]hange [I]nside [']quote
 			require("mini.ai").setup({
 				-- Number of lines within which surrounding is searched
-				n_lines = 5,
+				n_lines = 20,
 			})
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
 			--
@@ -837,15 +846,15 @@ require("lazy").setup({
 					"eslint_d",
 				},
 				typescript = {
-					-- "prettierd",
+					"prettierd",
 					"eslint_d",
 				},
 				javascriptreact = {
-					-- "prettierd",
+					"prettierd",
 					"eslint_d",
 				},
 				typescriptreact = {
-					-- "prettierd",
+					"prettierd",
 					"eslint_d",
 				},
 				json = { "prettierd" },
@@ -887,5 +896,30 @@ require("lazy").setup({
 		--    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
 		--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 		--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+	},
+
+	{
+		"ahkohd/context.nvim",
+		config = function()
+			local context = require("context")
+			context.setup({
+				picker = context.pickers.telescope,
+				prompts = {
+					explain = "Explain {this}",
+					fix = "Fix the issue at {position}",
+					review = "Review {file} for issues",
+				},
+			})
+		end,
+		keys = {
+			{
+				"<leader>a",
+				function()
+					require("context").pick()
+				end,
+				desc = "Context",
+				mode = { "n", "v" },
+			},
+		},
 	},
 })
