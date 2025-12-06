@@ -259,7 +259,7 @@ require("lazy").setup({
 		"loctvl842/monokai-pro.nvim",
 		config = function()
 			require("monokai-pro").setup({
-				transparent_background = true,
+				-- transparent_background = true,
 				filter = "spectrum",
 				override = function()
 					return {
@@ -717,6 +717,7 @@ require("lazy").setup({
 				cssmodules_ls = {},
 				eslint = {},
 				tailwindcss = {},
+				pyright = {},
 			}
 
 			-- Additional formatter/linter from mason
@@ -805,65 +806,6 @@ require("lazy").setup({
 		},
 	},
 
-	{ -- Autoformat
-		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
-		cmd = { "ConformInfo" },
-		keys = {
-			{
-				"<leader>f",
-				function()
-					require("conform").format({ async = true, lsp_format = "fallback" })
-				end,
-				mode = "",
-				desc = "[F]ormat buffer",
-			},
-		},
-		opts = {
-			notify_on_error = false,
-			format_on_save = function(bufnr)
-				-- Disable "format_on_save lsp_fallback" for languages that don't
-				-- have a well standardized coding style. You can add additional
-				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true }
-				if disable_filetypes[vim.bo[bufnr].filetype] then
-					return nil
-				else
-					return {
-						timeout_ms = 200,
-						lsp_format = "fallback",
-					}
-				end
-			end,
-			formatters_by_ft = {
-				lua = { "stylua" },
-				-- Conform can also run multiple formatters sequentially
-				-- python = { "isort", "black" },
-				--
-				-- You can use 'stop_after_first' to run the first available formatter from the list
-				javascript = {
-					-- "prettierd",
-					"eslint_d",
-				},
-				typescript = {
-					"prettierd",
-					"eslint_d",
-				},
-				javascriptreact = {
-					"prettierd",
-					"eslint_d",
-				},
-				typescriptreact = {
-					"prettierd",
-					"eslint_d",
-				},
-				json = { "prettierd" },
-				css = { "prettierd" },
-				markdown = { "prettierd" },
-			},
-		},
-	},
-
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -919,6 +861,65 @@ require("lazy").setup({
 				end,
 				desc = "Context",
 				mode = { "n", "v" },
+			},
+		},
+	},
+
+	{ -- Autoformat
+		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		keys = {
+			{
+				"<leader>f",
+				function()
+					require("conform").format({ async = true, lsp_format = "fallback" })
+				end,
+				mode = "",
+				desc = "[F]ormat buffer",
+			},
+		},
+		opts = {
+			notify_on_error = false,
+			format_on_save = function(bufnr)
+				-- Disable "format_on_save lsp_fallback" for languages that don't
+				-- have a well standardized coding style. You can add additional
+				-- languages here or re-enable it for the disabled ones.
+				local disable_filetypes = { c = true, cpp = true }
+				if disable_filetypes[vim.bo[bufnr].filetype] then
+					return nil
+				else
+					return {
+						timeout_ms = 200,
+						lsp_format = "fallback",
+					}
+				end
+			end,
+			formatters_by_ft = {
+				lua = { "stylua" },
+				-- Conform can also run multiple formatters sequentially
+				-- python = { "isort", "black" },
+				--
+				-- You can use 'stop_after_first' to run the first available formatter from the list
+				javascript = {
+					-- "prettierd",
+					"eslint_d",
+				},
+				typescript = {
+					-- "prettierd",
+					"eslint_d",
+				},
+				javascriptreact = {
+					-- "prettierd",
+					"eslint_d",
+				},
+				typescriptreact = {
+					-- "prettierd",
+					"eslint_d",
+				},
+				json = { "prettierd" },
+				css = { "prettierd" },
+				markdown = { "prettierd" },
 			},
 		},
 	},
