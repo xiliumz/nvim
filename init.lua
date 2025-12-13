@@ -218,7 +218,7 @@ require("lazy").setup({
 						enabled = true,
 						leave_dirs_open = false,
 					},
-					hijack_netrw_behavior = "open_current",
+					hijack_netrw_behavior = "open_current", -- Navigate to current file when open neo-tree
 				},
 
 				buffers = {
@@ -259,7 +259,7 @@ require("lazy").setup({
 		"loctvl842/monokai-pro.nvim",
 		config = function()
 			require("monokai-pro").setup({
-				-- transparent_background = true,
+				transparent_background = true,
 				filter = "spectrum",
 				override = function()
 					return {
@@ -357,6 +357,7 @@ require("lazy").setup({
 			end,
 		},
 	},
+	{ "sindrets/diffview.nvim", opts = {} },
 	{
 		"kdheepak/lazygit.nvim",
 		lazy = true,
@@ -840,6 +841,7 @@ require("lazy").setup({
 		--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 	},
 
+	-- Shortcut to get context for AI agent
 	{
 		"ahkohd/context.nvim",
 		config = function()
