@@ -363,7 +363,14 @@ require("lazy").setup({
 			end,
 		},
 	},
-	{ "sindrets/diffview.nvim", opts = {} },
+	{
+		"sindrets/diffview.nvim",
+		opts = {},
+		keys = {
+			{ "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
+			{ "<leader>gD", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
+		},
+	},
 	{
 		"kdheepak/lazygit.nvim",
 		lazy = true,
