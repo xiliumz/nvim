@@ -255,8 +255,29 @@ require("lazy").setup({
 				filter = "spectrum",
 				override = function()
 					return {
+						-- existing overrides
 						["@lsp.type.parameter"] = { link = "@variable.parameter" },
 						["@lsp.typemod.variable.readonly"] = { link = "@constant" },
+
+						-- Diff colors
+						DiffAdd = { bg = "#27321d", fg = "#a9dc76" },
+						DiffChange = { bg = "#2d2a2e", fg = "#ffd866" },
+						DiffDelete = { bg = "#3b1f1f", fg = "#ff6188" },
+						DiffText = {
+							fg = "#ffd866", -- yellow (Monokai accent)
+							bg = "#3a3a3a",
+							bold = true,
+						},
+
+						-- Diffview links
+						DiffviewDiffAdd = { link = "DiffAdd" },
+						DiffviewDiffChange = { link = "DiffChange" },
+						DiffviewDiffDelete = { link = "DiffDelete" },
+						DiffviewDiffText = { link = "DiffText" },
+
+						-- Optional file panel
+						DiffviewFilePanelSelected = { fg = "#ffd866", bold = true },
+						DiffviewFilePanelTitle = { fg = "#78dce8", bold = true },
 					}
 				end,
 			})
