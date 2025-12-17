@@ -367,7 +367,17 @@ require("lazy").setup({
 		"sindrets/diffview.nvim",
 		opts = {},
 		keys = {
-			{ "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
+			{
+				"<leader>gd",
+				function()
+					vim.ui.input({ prompt = "Diffview target: ", default = "HEAD" }, function(input)
+						if input then
+							vim.cmd("DiffviewOpen " .. input)
+						end
+					end)
+				end,
+				desc = "Open Diffview",
+			},
 			{ "<leader>gD", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
 		},
 	},
