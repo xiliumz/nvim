@@ -137,7 +137,8 @@ require("lazy").setup({
 			vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { desc = "Go To Previous Tab" })
 			vim.keymap.set("n", "<A-,>", "<Cmd>BufferLineMovePrev<CR>")
 			vim.keymap.set("n", "<A-.>", "<Cmd>BufferLineMoveNext<CR>")
-			vim.keymap.set("n", "<leader>d", ":bdelete<CR>", { desc = "Delete Buffer" })
+			vim.keymap.set("n", "<leader>d", ":bd<CR>", { desc = "Delete Buffer" })
+			vim.keymap.set("n", "<leader>D", ":%bd<CR>", { desc = "Delete All Buffer" })
 			for i = 1, 9 do
 				vim.keymap.set("n", "<leader>" .. i, function()
 					vim.cmd("BufferLineGoToBuffer " .. i)
@@ -424,6 +425,7 @@ require("lazy").setup({
 
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
+			vim.keymap.set("n", "<leader>sc", builtin.commands, { desc = "[S]earch [C]ommands" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
 			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
@@ -709,6 +711,7 @@ require("lazy").setup({
 			vim.list_extend(ensure_installed, {
 				"stylua",
 				"eslint_d",
+				"prettierd",
 			})
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
@@ -824,6 +827,7 @@ require("lazy").setup({
 		--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 	},
 
+	-- ===== AI INTEGRATION =====
 	-- Shortcut to get context for AI agent
 	{
 		"ahkohd/context.nvim",
@@ -895,11 +899,11 @@ require("lazy").setup({
 					"eslint_d",
 				},
 				javascriptreact = {
-					-- "prettierd",
+					"prettierd",
 					"eslint_d",
 				},
 				typescriptreact = {
-					-- "prettierd",
+					"prettierd",
 					"eslint_d",
 				},
 				json = { "prettierd" },
