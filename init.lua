@@ -84,6 +84,20 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function()
+		vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#27321d", fg = "#a9dc76" })
+		vim.api.nvim_set_hl(0, "DiffChange", { bg = "#2d2a2e", fg = "#ffd866" })
+		vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#3b1f1f", fg = "#ff6188" })
+		vim.api.nvim_set_hl(0, "DiffText", { fg = "#ffd866", bg = "#3a3a3a", bold = true })
+
+		vim.api.nvim_set_hl(0, "DiffviewDiffAdd", { link = "DiffAdd" })
+		vim.api.nvim_set_hl(0, "DiffviewDiffChange", { link = "DiffChange" })
+		vim.api.nvim_set_hl(0, "DiffviewDiffDelete", { link = "DiffDelete" })
+		vim.api.nvim_set_hl(0, "DiffviewDiffText", { link = "DiffText" })
+	end,
+})
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -230,7 +244,7 @@ require("lazy").setup({
 	-- 	priority = 1000,
 	-- 	config = function()
 	-- 		require("catppuccin").setup({
-	-- 			-- transparent_background = true,
+	-- 			transparent_background = true,
 	-- 		})
 	-- 		vim.cmd.colorscheme("catppuccin")
 	-- 	end,
@@ -255,29 +269,8 @@ require("lazy").setup({
 				filter = "spectrum",
 				override = function()
 					return {
-						-- existing overrides
 						["@lsp.type.parameter"] = { link = "@variable.parameter" },
 						["@lsp.typemod.variable.readonly"] = { link = "@constant" },
-
-						-- Diff colors
-						DiffAdd = { bg = "#27321d", fg = "#a9dc76" },
-						DiffChange = { bg = "#2d2a2e", fg = "#ffd866" },
-						DiffDelete = { bg = "#3b1f1f", fg = "#ff6188" },
-						DiffText = {
-							fg = "#ffd866", -- yellow (Monokai accent)
-							bg = "#3a3a3a",
-							bold = true,
-						},
-
-						-- Diffview links
-						DiffviewDiffAdd = { link = "DiffAdd" },
-						DiffviewDiffChange = { link = "DiffChange" },
-						DiffviewDiffDelete = { link = "DiffDelete" },
-						DiffviewDiffText = { link = "DiffText" },
-
-						-- Optional file panel
-						DiffviewFilePanelSelected = { fg = "#ffd866", bold = true },
-						DiffviewFilePanelTitle = { fg = "#78dce8", bold = true },
 					}
 				end,
 			})
