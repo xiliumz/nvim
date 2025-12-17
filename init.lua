@@ -370,11 +370,16 @@ require("lazy").setup({
 			{
 				"<leader>gd",
 				function()
-					vim.ui.input({ prompt = "Diffview target: ", default = "HEAD" }, function(input)
-						if input then
-							vim.cmd("DiffviewOpen " .. input)
-						end
-					end)
+					require("telescope.builtin").git_branches({
+						attach_mappings = function(_, map)
+							map("i", "<CR>", function(prompt_bufnr)
+								local selection = require("telescope.actions.state").get_selected_entry()
+								require("telescope.actions").close(prompt_bufnr)
+								vim.cmd("DiffviewOpen " .. selection.value)
+							end)
+							return true
+						end,
+					})
 				end,
 				desc = "Open Diffview",
 			},
