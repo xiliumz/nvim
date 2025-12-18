@@ -459,7 +459,13 @@ require("lazy").setup({
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
 					},
-					frecency = { auto_validate = false, matcher = "fuzzy", path_display = { "filename_first" } },
+					---@module 'frecency'
+					---@type FrecencyOpts
+					frecency = {
+						-- auto_validate = false,
+						matcher = "fuzzy",
+						path_display = { "filename_first" },
+					},
 				},
 			})
 
@@ -745,7 +751,9 @@ require("lazy").setup({
 					},
 				},
 				cssmodules_ls = {},
-				eslint = {},
+				eslint = {
+					filetypes = { "javascript", "typescript" }, -- no react
+				},
 				tailwindcss = {},
 				pyright = {},
 			}
