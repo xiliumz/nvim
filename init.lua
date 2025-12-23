@@ -367,8 +367,9 @@ require("lazy").setup({
 		"sindrets/diffview.nvim",
 		opts = {},
 		keys = {
+			{ "<leader>gd", "<cmd>DiffViewOpen<cr>", desc = "Open Diffview" },
 			{
-				"<leader>gd",
+				"<leader>gb",
 				function()
 					require("telescope.builtin").git_branches({
 						attach_mappings = function(_, map)
@@ -379,17 +380,9 @@ require("lazy").setup({
 							end)
 							return true
 						end,
-						finder = require("telescope.finders").new_oneshot_job({
-							"git",
-							"for-each-ref",
-							"--format=%(refname:short)",
-							"--exclude=refs/remotes/origin/HEAD",
-							"refs/remotes",
-						}, {}),
-						sorter = require("telescope.sorters").get_generic_fuzzy_sorter(),
 					})
 				end,
-				desc = "Open Diffview",
+				desc = "Open Diffview Against a Branch",
 			},
 			{ "<leader>gD", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
 		},
