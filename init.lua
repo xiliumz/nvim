@@ -379,6 +379,14 @@ require("lazy").setup({
 							end)
 							return true
 						end,
+						finder = require("telescope.finders").new_oneshot_job({
+							"git",
+							"for-each-ref",
+							"--format=%(refname:short)",
+							"--exclude=refs/remotes/origin/HEAD",
+							"refs/remotes",
+						}, {}),
+						sorter = require("telescope.sorters").get_generic_fuzzy_sorter(),
 					})
 				end,
 				desc = "Open Diffview",
