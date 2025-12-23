@@ -367,7 +367,7 @@ require("lazy").setup({
 		"sindrets/diffview.nvim",
 		opts = {},
 		keys = {
-			{ "<leader>gd", "<cmd>DiffViewOpen<cr>", desc = "Open Diffview" },
+			{ "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview" },
 			{
 				"<leader>gb",
 				function()
