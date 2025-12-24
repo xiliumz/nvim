@@ -463,7 +463,8 @@ require("lazy").setup({
 					---@module 'frecency'
 					---@type FrecencyOpts
 					frecency = {
-						-- auto_validate = false,
+						auto_validate = true,
+						db_validate_threshold = 1,
 						matcher = "fuzzy",
 						path_display = { "filename_first" },
 					},
@@ -542,7 +543,7 @@ require("lazy").setup({
 			--  - ci'  - [C]hange [I]nside [']quote
 			require("mini.ai").setup({
 				-- Number of lines within which surrounding is searched
-				n_lines = 20,
+				n_lines = 50,
 			})
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
 			--
@@ -911,7 +912,6 @@ require("lazy").setup({
 
 	{ -- Autoformat
 		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		keys = {
 			{
@@ -924,7 +924,7 @@ require("lazy").setup({
 			},
 		},
 		opts = {
-			notify_on_error = false,
+			-- notify_on_error = false,
 			format_on_save = function(bufnr)
 				-- Disable "format_on_save lsp_fallback" for languages that don't
 				-- have a well standardized coding style. You can add additional
@@ -946,11 +946,11 @@ require("lazy").setup({
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
 				javascript = {
-					-- "prettierd",
+					"prettierd",
 					"eslint_d",
 				},
 				typescript = {
-					-- "prettierd",
+					"prettierd",
 					"eslint_d",
 				},
 				javascriptreact = {
