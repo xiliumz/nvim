@@ -727,33 +727,9 @@ require("lazy").setup({
 			-- Server to be defined in mason-lspconfig, refer to:
 			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 			local servers = {
+				yamlls = {},
 				lua_ls = {},
-				ts_ls = {
-					settings = {
-						javascript = {
-							inlayHints = {
-								includeInlayEnumMemberValueHints = true,
-								includeInlayFunctionLikeReturnTypeHints = true,
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-								includeInlayPropertyDeclarationTypeHints = true,
-								includeInlayVariableTypeHints = false,
-							},
-						},
-						typescript = {
-							inlayHints = {
-								includeInlayEnumMemberValueHints = true,
-								includeInlayFunctionLikeReturnTypeHints = true,
-								includeInlayFunctionParameterTypeHints = true,
-								includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-								includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-								includeInlayPropertyDeclarationTypeHints = true,
-								includeInlayVariableTypeHints = false,
-							},
-						},
-					},
-				},
+				ts_ls = {},
 				cssmodules_ls = {},
 				eslint = {
 					filetypes = { "javascript", "typescript" }, -- no react
