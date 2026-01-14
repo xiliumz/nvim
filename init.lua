@@ -731,9 +731,7 @@ require("lazy").setup({
 				lua_ls = {},
 				ts_ls = {},
 				cssmodules_ls = {},
-				eslint = {
-					filetypes = { "javascript", "typescript" }, -- no react
-				},
+				eslint = {},
 				tailwindcss = {},
 				pyright = {},
 			}
@@ -858,6 +856,10 @@ require("lazy").setup({
 		--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 		--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 	},
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		opts = {}
+	},
 
 	-- ===== AI INTEGRATION =====
 	-- Shortcut to get context for AI agent
@@ -910,7 +912,7 @@ require("lazy").setup({
 					return nil
 				else
 					return {
-						timeout_ms = 200,
+						timeout_ms = 500,
 						lsp_format = "fallback",
 					}
 				end
