@@ -20,7 +20,7 @@ vim.o.splitbelow = true
 -- Highlight line under the cursor
 vim.o.cursorline = true
 -- Line scroll offset
-vim.o.scrolloff = 20
+vim.o.scrolloff = 15
 -- Basically it will indent new line because of wrap line
 vim.o.breakindent = true
 -- Better for searching using `/`
@@ -454,6 +454,7 @@ require("lazy").setup({
 					find_files = {
 						hidden = true,
 						find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
+						path_display = { "filename_first" },
 					},
 				},
 				extensions = {
@@ -858,7 +859,7 @@ require("lazy").setup({
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		opts = {}
+		opts = {},
 	},
 
 	-- ===== AI INTEGRATION =====
