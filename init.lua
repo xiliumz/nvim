@@ -642,6 +642,8 @@ require("lazy").setup({
 					--  the definition of its *type*, not where it was *defined*.
 					map("grt", require("telescope.builtin").lsp_type_definitions, "[G]oto [T]ype Definition")
 
+					map("<leader>F", vim.diagnostic.open_float, "[F]loat diagnostic")
+
 					-- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
 					local function client_supports_method(client, method, bufnr)
 						if vim.fn.has("nvim-0.11") == 1 then
