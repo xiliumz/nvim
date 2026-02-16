@@ -8,6 +8,8 @@ vim.g.have_nerd_font = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
+-- Auto read changes
+vim.o.autoread = true
 -- Combine clipboard with system
 vim.o.clipboard = "unnamedplus"
 -- Show line number
@@ -754,6 +756,9 @@ require("lazy").setup({
 
 			require("mason-lspconfig").setup({
 				automatic_installation = false,
+				automatic_enable = {
+					exclude = { "yamlls", "cssmodules_ls", "tailwindcss" },
+				},
 				handlers = function(server_name)
 					local server = servers[server_name] or {}
 					-- This handles overriding only values explicitly passed
