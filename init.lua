@@ -739,9 +739,7 @@ require("lazy").setup({
 				lua_ls = {},
 				ts_ls = {},
 				cssmodules_ls = {},
-				eslint = {},
 				tailwindcss = {},
-				pyright = {},
 			}
 
 			-- Additional formatter/linter from mason
@@ -757,7 +755,7 @@ require("lazy").setup({
 			require("mason-lspconfig").setup({
 				automatic_installation = false,
 				automatic_enable = {
-					exclude = { "yamlls", "cssmodules_ls", "tailwindcss" },
+					exclude = { "cssmodules_ls", "tailwindcss" },
 				},
 				handlers = function(server_name)
 					local server = servers[server_name] or {}
@@ -769,6 +767,11 @@ require("lazy").setup({
 				end,
 			})
 		end,
+	},
+
+	{
+		"esmuellert/nvim-eslint",
+		opts = {},
 	},
 
 	{ -- Autocompletion
