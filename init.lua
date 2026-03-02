@@ -755,7 +755,7 @@ require("lazy").setup({
 			require("mason-lspconfig").setup({
 				automatic_installation = false,
 				automatic_enable = {
-					exclude = { "cssmodules_ls", "tailwindcss" },
+					exclude = { "cssmodules_ls", "tailwindcss", "yamlls" },
 				},
 				handlers = function(server_name)
 					local server = servers[server_name] or {}
