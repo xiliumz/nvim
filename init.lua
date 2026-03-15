@@ -285,6 +285,15 @@ require("lazy").setup({
 	},
 
 	{
+		"rmagatti/auto-session",
+		opts = {
+			auto_save_enabled = true,
+			auto_restore_enabled = true,
+			auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
+		} -- optional
+	},
+
+	{
 		"lewis6991/gitsigns.nvim",
 		opts = {
 			current_line_blame = true,
@@ -841,7 +850,7 @@ require("lazy").setup({
 	-- Tab completion
 	{
 		"supermaven-inc/supermaven-nvim",
-		opts = {}
+		opts = {},
 	},
 
 	{
