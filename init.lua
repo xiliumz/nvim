@@ -838,6 +838,12 @@ require("lazy").setup({
 		},
 	},
 
+	-- Tab completion
+	{
+		"supermaven-inc/supermaven-nvim",
+		opts = {}
+	},
+
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
