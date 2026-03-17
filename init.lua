@@ -117,6 +117,10 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+_G.get_oil_dir = function()
+	return vim.fn.fnamemodify(require("oil").get_current_dir(), ":~")
+end
+
 -- Example of vim.ui.select()
 -- vim.keymap.set("n", "<leader>cc", function()
 --   local colors = { "red", "green", "blue", "yellow" }
@@ -173,73 +177,92 @@ require("lazy").setup({
 		end,
 	},
 
+	-- {
+	-- 	"nvim-neo-tree/neo-tree.nvim",
+	-- 	branch = "v3.x",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-tree/nvim-web-devicons",
+	-- 		"MunifTanjim/nui.nvim",
+	-- 	},
+	-- 	config = function()
+	-- 		vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>")
+	--
+	-- 		require("neo-tree").setup({
+	-- 			event_handlers = {
+	-- 				{
+	-- 					event = "file_opened",
+	-- 					handler = function()
+	-- 						require("neo-tree.command").execute({ action = "close" })
+	-- 					end,
+	-- 				},
+	-- 			},
+	--
+	-- 			enable_diagnostics = true,
+	--
+	-- 			default_component_configs = {
+	-- 				git_status = {
+	-- 					symbols = {
+	-- 						added = "✚",
+	-- 						modified = "",
+	-- 						deleted = "✖",
+	-- 						renamed = "󰁕",
+	-- 						untracked = "",
+	-- 						ignored = "",
+	-- 						unstaged = "󰄱",
+	-- 						staged = "",
+	-- 						conflict = "",
+	-- 					},
+	-- 				},
+	-- 			},
+	--
+	-- 			window = {
+	-- 				mappings = {
+	-- 					["a"] = {
+	-- 						"add",
+	-- 						config = { show_path = "relative" },
+	-- 					},
+	-- 				},
+	-- 			},
+	--
+	-- 			filesystem = {
+	-- 				filtered_items = {
+	-- 					visible = true,
+	-- 				},
+	-- 				follow_current_file = {
+	-- 					enabled = true,
+	-- 					leave_dirs_open = false,
+	-- 				},
+	-- 				hijack_netrw_behavior = "open_current", -- Navigate to current file when open neo-tree
+	-- 			},
+	--
+	-- 			buffers = {
+	-- 				follow_current_file = {
+	-- 					enabled = true,
+	-- 					leave_dirs_open = false,
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
+
 	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"MunifTanjim/nui.nvim",
+		"stevearc/oil.nvim",
+		opts = {
+			win_options = {
+				winbar = "%!v:lua.get_oil_dir()",
+			},
+			view_options = {
+				show_hidden = true,
+			},
 		},
-		config = function()
-			vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>")
-
-			require("neo-tree").setup({
-				event_handlers = {
-					{
-						event = "file_opened",
-						handler = function()
-							require("neo-tree.command").execute({ action = "close" })
-						end,
-					},
-				},
-
-				enable_diagnostics = true,
-
-				default_component_configs = {
-					git_status = {
-						symbols = {
-							added = "✚",
-							modified = "",
-							deleted = "✖",
-							renamed = "󰁕",
-							untracked = "",
-							ignored = "",
-							unstaged = "󰄱",
-							staged = "",
-							conflict = "",
-						},
-					},
-				},
-
-				window = {
-					mappings = {
-						["a"] = {
-							"add",
-							config = { show_path = "relative" },
-						},
-					},
-				},
-
-				filesystem = {
-					filtered_items = {
-						visible = true,
-					},
-					follow_current_file = {
-						enabled = true,
-						leave_dirs_open = false,
-					},
-					hijack_netrw_behavior = "open_current", -- Navigate to current file when open neo-tree
-				},
-
-				buffers = {
-					follow_current_file = {
-						enabled = true,
-						leave_dirs_open = false,
-					},
-				},
-			})
-		end,
+		keys = {
+			{ "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" } },
+		},
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+		lazy = false,
 	},
 
 	-- Themes
