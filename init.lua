@@ -76,6 +76,9 @@ vim.keymap.set(
 	{ desc = "Split terminal horizontally (open right)" }
 )
 
+vim.keymap.set({ "n", "v" }, "<C-Up>", "3k", { desc = "Move up 3 lines" })
+vim.keymap.set({ "n", "v" }, "<C-Down>", "3j", { desc = "Move down 3 lines" })
+
 -- [[ Basic Autocommands ]]
 -- Highlight when yanking text
 vim.api.nvim_create_autocmd("TextYankPost", {
