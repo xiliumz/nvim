@@ -914,16 +914,12 @@ require("lazy").setup({
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		opts = {},
-		keys = {
-			{
-				"<leader>[",
-				function()
-					require("treesitter-context").go_to_context(vim.v.count1)
-				end,
-				desc = "Go to parent context",
-			},
-		},
+		config = function()
+			require("treesitter-context").setup({})
+			vim.keymap.set("n", "<leader>[", function()
+				require("treesitter-context").go_to_context(vim.v.count1)
+			end, { desc = "Go to parent context" })
+		end,
 	},
 
 	-- ===== AI INTEGRATION =====
