@@ -250,23 +250,38 @@ require("lazy").setup({
 	-- },
 
 	{
-		"stevearc/oil.nvim",
+		"A7Lavinraj/fyler.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		branch = "stable", -- Use stable branch for production
+		lazy = false, -- Necessary for `default_explorer` to work properly
 		opts = {
-			win_options = {
-				winbar = "%!v:lua.get_oil_dir()",
-			},
-			view_options = {
-				show_hidden = true,
+			integrations = {
+				icon = "nvim_web_devicons",
 			},
 		},
 		keys = {
-			{ "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" } },
+			{ "<leader>e", "<cmd>Fyler<cr>", { desc = "Open Fyler View" } },
 		},
-		-- Optional dependencies
-		dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
-		lazy = false,
 	},
+
+	-- {
+	-- 	"stevearc/oil.nvim",
+	-- 	opts = {
+	-- 		win_options = {
+	-- 			winbar = "%!v:lua.get_oil_dir()",
+	-- 		},
+	-- 		view_options = {
+	-- 			show_hidden = true,
+	-- 		},
+	-- 	},
+	-- 	keys = {
+	-- 		{ "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" } },
+	-- 	},
+	-- 	-- Optional dependencies
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+	-- 	-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+	-- 	lazy = false,
+	-- },
 
 	-- Themes
 	-- {
@@ -316,7 +331,7 @@ require("lazy").setup({
 			auto_save_enabled = true,
 			auto_restore_enabled = true,
 			auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
-		} -- optional
+		}, -- optional
 	},
 
 	{
