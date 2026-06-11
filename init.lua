@@ -10,6 +10,23 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 -- Auto read changes
 vim.o.autoread = true
+-- Force OSC 52 when running as non-primary user, or always
+local original_user = vim.fn.system("logname"):gsub("%s+", "")
+local current_user = os.getenv("USER")
+
+if original_user ~= current_user then
+	vim.g.clipboard = {
+		name = "OSC 52 + xclip Paste",
+		copy = {
+			["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+			["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+		},
+		paste = {
+			["+"] = { "xclip", "-selection", "clipboard", "-o" },
+			["*"] = { "xclip", "-selection", "primary", "-o" },
+		},
+	}
+end
 -- Combine clipboard with system
 vim.o.clipboard = "unnamedplus"
 -- Show line number
@@ -57,6 +74,11 @@ vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", {}) -- Alt j to down
 vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", {}) -- Alt k to up
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+
+vim.keymap.set("n", "<A-Down>", ":m .+1<CR>==", {})
+vim.keymap.set("n", "<A-Up>", ":m .-2<CR>==", {})
+vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic" })
@@ -1013,7 +1035,7 @@ require("lazy").setup({
 					"eslint_d",
 				},
 				typescript = {
-					"prettierd",
+					-- "prettierd",
 					"eslint_d",
 				},
 				javascriptreact = {
@@ -1021,7 +1043,7 @@ require("lazy").setup({
 					"eslint_d",
 				},
 				typescriptreact = {
-					"prettierd",
+					-- "prettierd",
 					"eslint_d",
 				},
 				json = { "prettierd" },
