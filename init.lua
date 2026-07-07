@@ -807,6 +807,7 @@ require("lazy").setup({
 			-- Server to be defined in mason-lspconfig, refer to:
 			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 			local servers = {
+				astro = {},
 				yamlls = {},
 				lua_ls = {},
 				ts_ls = {},
