@@ -447,6 +447,12 @@ require("lazy").setup({
 		keys = {
 			{ "<leader>gd", "<cmd>CodeDiff<cr>", desc = "Toggle Code Diff" },
 		},
+		opts = {
+			explorer = {
+				view_mode = "tree", -- "list" or "tree"
+				focus_on_select = true,
+			},
+		},
 	},
 	-- {
 	-- 	"sindrets/diffview.nvim",
@@ -630,7 +636,7 @@ require("lazy").setup({
 			--  - ci'  - [C]hange [I]nside [']quote
 			require("mini.ai").setup({
 				-- Number of lines within which surrounding is searched
-				n_lines = 50,
+				n_lines = 200,
 			})
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
 			--
@@ -1043,7 +1049,7 @@ require("lazy").setup({
 					"eslint_d",
 				},
 				typescriptreact = {
-					-- "prettierd",
+					"prettierd",
 					"eslint_d",
 				},
 				json = { "prettierd" },
