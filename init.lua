@@ -448,6 +448,9 @@ require("lazy").setup({
 			{ "<leader>gd", "<cmd>CodeDiff<cr>", desc = "Toggle Code Diff" },
 		},
 		opts = {
+			diff = {
+				layout = "inline",
+			},
 			explorer = {
 				view_mode = "tree", -- "list" or "tree"
 				focus_on_select = true,
