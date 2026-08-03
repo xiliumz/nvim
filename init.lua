@@ -1064,7 +1064,6 @@ require("lazy").setup({
 				},
 				json = { "prettierd" },
 				css = { "prettierd" },
-				markdown = { "prettierd" },
 			},
 		},
 	},
