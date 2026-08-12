@@ -866,13 +866,6 @@ require("lazy").setup({
 		opts = {},
 	},
 
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
-		---@module 'render-markdown'
-		opts = {},
-	},
-
 	{ -- Autocompletion
 		"saghen/blink.cmp",
 		event = "VimEnter",
@@ -1064,6 +1057,7 @@ require("lazy").setup({
 				},
 				json = { "prettierd" },
 				css = { "prettierd" },
+				markdown = { "prettierd" },
 			},
 		},
 	},
