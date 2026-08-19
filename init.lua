@@ -5,6 +5,7 @@ vim.g.have_nerd_font = true
 
 -- [[ Vim Options ]]
 -- Tab Options
+vim.opt.wrap = true
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
