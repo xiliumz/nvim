@@ -841,6 +841,7 @@ require("lazy").setup({
 				"stylua",
 				"eslint_d",
 				"prettierd",
+				"sleek",
 			})
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
@@ -1059,6 +1060,7 @@ require("lazy").setup({
 				json = { "prettierd" },
 				css = { "prettierd" },
 				markdown = { "prettierd" },
+				sql = { "sleek" },
 			},
 		},
 	},
