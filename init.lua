@@ -590,6 +590,12 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
 			vim.keymap.set("n", "<leader>gf", builtin.git_status, { desc = "Search [G]it Changed [F]iles" })
+			vim.keymap.set("n", "<leader>gs", function()
+				builtin.git_files({ git_command = { "git", "-c", "core.quotepath=false", "diff", "--cached", "--name-only" }, prompt_title = "Staged Files" })
+			end, { desc = "Search [G]it [S]taged files" })
+			vim.keymap.set("n", "<leader>gu", function()
+				builtin.git_files({ git_command = { "git", "-c", "core.quotepath=false", "ls-files", "--modified", "--others", "--exclude-standard" }, prompt_title = "Unstaged Files" })
+			end, { desc = "Search [G]it [U]nstaged files" })
 
 			-- Slightly advanced example of overriding default behavior and theme
 			vim.keymap.set("n", "<leader>/", function()
