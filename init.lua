@@ -453,6 +453,7 @@ require("lazy").setup({
 				layout = "inline",
 			},
 			explorer = {
+				hidden = true,
 				view_mode = "tree", -- "list" or "tree"
 				focus_on_select = true,
 			},
