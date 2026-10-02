@@ -595,7 +595,23 @@ require("lazy").setup({
 				builtin.git_files({ git_command = { "git", "-c", "core.quotepath=false", "diff", "--cached", "--name-only" }, prompt_title = "Staged Files" })
 			end, { desc = "Search [G]it [S]taged files" })
 			vim.keymap.set("n", "<leader>gu", function()
-				builtin.git_files({ git_command = { "git", "-c", "core.quotepath=false", "ls-files", "--modified", "--others", "--exclude-standard" }, prompt_title = "Unstaged Files" })
+				builtin.git_files({
+					git_command = { "git", "-c", "core.quotepath=false", "ls-files", "--modified", "--others", "--exclude-standard" },
+					prompt_title = "Unstaged Files",
+					attach_mappings = function(_, map)
+						map({ "i", "n" }, "<Tab>", function(prompt_bufnr)
+							local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+							picker:delete_selection(function(entry)
+								local output = vim.fn.system({ "git", "-C", picker.cwd or vim.fn.getcwd(), "add", "--", entry.value })
+								if vim.v.shell_error ~= 0 then
+									vim.notify(output, vim.log.levels.ERROR)
+									return false
+								end
+							end)
+						end)
+						return true
+					end,
+				})
 			end, { desc = "Search [G]it [U]nstaged files" })
 
 			-- Slightly advanced example of overriding default behavior and theme
