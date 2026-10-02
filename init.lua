@@ -987,12 +987,6 @@ require("lazy").setup({
 		end,
 	},
 
-	{
-		"zion-off/mole.nvim",
-		dependencies = { "MunifTanjim/nui.nvim" },
-		opts = {},
-	},
-
 	-- ===== AI INTEGRATION =====
 	-- Shortcut to get context for AI agent
 	{
