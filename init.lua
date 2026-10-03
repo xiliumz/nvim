@@ -980,36 +980,55 @@ require("lazy").setup({
 
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		lazy = false,
 		build = ":TSUpdate",
-		main = "nvim-treesitter.configs", -- Sets main module to use for opts
-		-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-		opts = {
-			-- Autoinstall languages that are not installed
-			auto_install = true,
-			highlight = {
-				enable = true,
-				-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-				--  If you are experiencing weird indenting issues, add the language to
-				--  the list of additional_vim_regex_highlighting and disabled languages for indent.
-				additional_vim_regex_highlighting = { "ruby" },
-			},
-			indent = { enable = true, disable = { "ruby" } },
-		},
-		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
 
-			-- Folding settings
-			vim.o.foldmethod = "expr"
-			vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-			vim.o.foldlevel = 99
-			vim.o.foldenable = true
+		config = function()
+			local treesitter = require("nvim-treesitter")
+
+			local available = {}
+			for _, lang in ipairs(treesitter.get_available()) do
+				available[lang] = true
+			end
+
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function(event)
+					local buf = event.buf
+					local ft = vim.bo[buf].filetype
+					local lang = vim.treesitter.language.get_lang(ft)
+
+					if not lang or not available[lang] then
+						return
+					end
+
+					local function start()
+						if not vim.api.nvim_buf_is_valid(buf) then
+							return
+						end
+
+						pcall(vim.treesitter.start, buf, lang)
+
+						vim.wo.foldmethod = "expr"
+						vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+						vim.wo.foldlevel = 99
+						vim.wo.foldenable = true
+
+						if ft ~= "ruby" then
+							vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+						end
+					end
+
+					local parser = vim.api.nvim_get_runtime_file("parser/" .. lang .. ".*", false)
+
+					if #parser == 0 then
+						treesitter.install({ lang }):await(start)
+					else
+						start()
+					end
+				end,
+			})
 		end,
-		-- There are additional nvim-treesitter modules that you can use to interact
-		-- with nvim-treesitter. You should go explore a few and see what interests you:
-		--
-		--    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-		--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-		--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
