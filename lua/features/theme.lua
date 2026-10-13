@@ -19,6 +19,8 @@ return {
 			filter = "spectrum",
 			override = function()
 				return {
+					NormalFloat = { bg = "#2d2a2e", fg = "#fcfcfa" },
+					FloatBorder = { bg = "#2d2a2e", fg = "#ff6188" },
 					["@lsp.type.parameter"] = { link = "@variable.parameter" },
 					["@lsp.typemod.variable.readonly"] = { link = "@constant" },
 				}
