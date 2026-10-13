@@ -7,7 +7,7 @@ return {
 		"fidget.nvim",
 		"lazydev.nvim",
 	},
-	tools = { "astro", "yamlls", "lua_ls", "ts_ls", "cssmodules_ls", "tailwindcss", "pyright" },
+	tools = { "astro", "yamlls", "lua_ls", "ts_ls", "cssmodules_ls", "tailwindcss", "pyright", "rust_analyzer" },
 	setup = function()
 		require("lazydev").setup({
 			library = {

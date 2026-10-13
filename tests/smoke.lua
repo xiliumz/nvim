@@ -40,6 +40,7 @@ vim.pack.add = function(specs, opts)
 	local installer = require("mason-tool-installer")
 	local setup = installer.setup
 	installer.setup = function(options)
+		assert(vim.tbl_contains(options.ensure_installed, "rust_analyzer"), "Rust LSP must be installed")
 		options.run_on_start = false
 		setup(options)
 	end
