@@ -83,6 +83,18 @@ return {
 			},
 		})
 		vim.keymap.set("n", "<leader>gd", "<cmd>CodeDiff<cr>", { desc = "Toggle Code Diff" })
+		vim.keymap.set("n", "<leader>gw", function()
+			local original, modified = require("codediff.ui.lifecycle").get_windows(vim.api.nvim_get_current_tabpage())
+			local wrap
+			for _, win in pairs({ original, modified }) do
+				if vim.api.nvim_win_is_valid(win) then
+					if wrap == nil then
+						wrap = not vim.wo[win].wrap
+					end
+					vim.wo[win].wrap = wrap
+				end
+			end
+		end, { desc = "Toggle Code Diff Wrap" })
 		vim.keymap.set("n", "<leader>lg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
 	end,
 }
